@@ -1,5 +1,10 @@
 import { GraphQLFormattedError } from "graphql";
 
+type Error = {
+  message: String;
+  statusCode: String;
+};
+
 const customFetch = async (url: string, options: RequestInit) => {
   const accessToken = localStorage.getItem("access_token");
 
@@ -30,5 +35,11 @@ const getGraphQLErrors = (
 
     const messages = errors?.map((error) => error?.message)?.join("");
     const code = errors?.[0]?.extensions?.code;
+
+    return {
+      message: messages || JSON.stringify(errors),
+      statusCode: code || 500,
+    };
   }
+  return null;
 };
