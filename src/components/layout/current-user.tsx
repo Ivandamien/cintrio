@@ -62,7 +62,11 @@ const CurrentUser = () => {
               />    
           </Popover>
           {user && (
-              <AccountSettings/>
+              <AccountSettings
+                  opened={isOpen}
+                  setOpened={setIsOpen}
+                  userId={user.id}
+              />
           ) }
       </>
       
