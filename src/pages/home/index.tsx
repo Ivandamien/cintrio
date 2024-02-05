@@ -1,5 +1,6 @@
-import { Col, Row } from 'antd';
 import React from 'react';
+import { DealsChart, UpcomingEvents } from '@/components';
+import { Col, Row } from 'antd';
 
  export const Home = () => {
   return (
@@ -20,7 +21,7 @@ import React from 'react';
                       height:'460px'
                   }}
               >
-                  CalendarUpcomingEvents
+                  <UpcomingEvents/>
               </Col>
               <Col
                   xs={24}
@@ -30,7 +31,7 @@ import React from 'react';
                       height:'460px'
                   }}
               >
-                  DashboardDealsChart
+                  <DealsChart/>
               </Col>
       </Row>
     </div>
