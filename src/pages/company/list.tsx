@@ -1,9 +1,11 @@
 import React from "react";
 import { CreateButton, FilterDropdown, List, useTable } from "@refinedev/antd";
 import { getDefaultFilter, useGo } from "@refinedev/core";
-import { Input, Table } from "antd";
+import { Input, Space, Table } from "antd";
 import { COMPANIES_LIST_QUERY } from "@/graphql/queries";
 import { SearchOutlined } from "@ant-design/icons";
+import CustomAvatar from "@/components/custom-avatar";
+import { Text } from "@/components/text";
 
 export const CompanyList = () => {
   const go = useGo();
@@ -60,6 +62,16 @@ export const CompanyList = () => {
             <FilterDropdown {...props}>
               <Input placeholder="Search Company" />
             </FilterDropdown>
+          )}
+          render={(value, record) => (
+            <Space>
+              <CustomAvatar
+                shape="square"
+                name={record.name}
+                src={record.avatarUrl}
+              />
+              <Text style={{ whiteSpace: "nowrap" }}>{record.name}</Text>
+            </Space>
           )}
         />
       </Table>
