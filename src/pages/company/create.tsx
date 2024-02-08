@@ -2,8 +2,12 @@ import React from "react";
 import { CompanyList } from "./list";
 import { Form, Input, Modal, Select } from "antd";
 import { useGo } from "@refinedev/core";
-import { useModalForm } from "@refinedev/antd";
+import { useModalForm, useSelect } from "@refinedev/antd";
 import { CREATE_COMPANY_MUTATION } from "@/graphql/mutations";
+import { USERS_SELECT_QUERY } from "@/graphql/queries";
+import SelectOptionWithAvatar from "@/components/select-option-with-avatar";
+import { GetFieldsFromList } from "@refinedev/nestjs-query";
+import { UsersSelectQuery } from "@/graphql/types";
 
 const Create = () => {
   const go = useGo();
@@ -24,6 +28,15 @@ const Create = () => {
     onMutationSuccess: goToListPage,
     meta: {
       gqlMutation: CREATE_COMPANY_MUTATION,
+    },
+  });
+  const { selectProps, queryResult } = useSelect<
+    GetFieldsFromList<UsersSelectQuery>
+  >({
+    resource: "users",
+    optionLabel: "name",
+    meta: {
+      gqlQuery: USERS_SELECT_QUERY,
     },
   });
   return (
@@ -48,7 +61,21 @@ const Create = () => {
             name="salesOwnerId"
             rules={[{ required: true }]}
           >
-            <Select placeholder="Please select a sales owner" />
+            <Select
+              placeholder="Please select a sales owner"
+              {...selectProps}
+              options={
+                queryResult.data?.data.map((user) => ({
+                  values: user.id,
+                  label: (
+                    <SelectOptionWithAvatar
+                      name={user.name}
+                      avatarUrl={user.avatarUrl ?? undefined}
+                    />
+                  ),
+                })) ?? []
+              }
+            />
           </Form.Item>
         </Form>
       </Modal>
