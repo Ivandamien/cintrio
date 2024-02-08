@@ -1,6 +1,6 @@
 import React from "react";
 import { CompanyList } from "./list";
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Modal, Select } from "antd";
 import { useGo } from "@refinedev/core";
 import { useModalForm } from "@refinedev/antd";
 import { CREATE_COMPANY_MUTATION } from "@/graphql/mutations";
@@ -42,6 +42,13 @@ const Create = () => {
             rules={[{ required: true, message: "Company name is required" }]}
           >
             <Input placeholder="Please enter a company name" />
+          </Form.Item>
+          <Form.Item
+            label="Sales owner"
+            name="salesOwnerId"
+            rules={[{ required: true }]}
+          >
+            <Select placeholder="Please select a sales owner" />
           </Form.Item>
         </Form>
       </Modal>
