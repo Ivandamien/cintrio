@@ -30,6 +30,7 @@ const Create = () => {
       gqlMutation: CREATE_COMPANY_MUTATION,
     },
   });
+
   const { selectProps, queryResult } = useSelect<
     GetFieldsFromList<UsersSelectQuery>
   >({
