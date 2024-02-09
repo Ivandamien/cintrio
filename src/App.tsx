@@ -71,7 +71,7 @@ function App() {
                     <Route path="new" element={<Create />} />
                     <Route path="edit/:id" element={<Edit />} />
                   </Route>
-                  <Route path="/task">
+                  <Route path="/tasks">
                     <Route index element={<List />} />
                   </Route>
                 </Route>

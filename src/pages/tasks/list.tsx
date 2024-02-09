@@ -1,7 +1,20 @@
+import {
+  KanbanBoard,
+  KanbanBoardContainer,
+} from "@/components/tasks/kanban/board";
+import KanbanColumn from "@/components/tasks/kanban/column";
 import React from "react";
 
 const List = () => {
-  return <div></div>;
+  return (
+    <>
+      <KanbanBoardContainer>
+        <KanbanBoard>
+          <KanbanColumn></KanbanColumn>
+        </KanbanBoard>
+      </KanbanBoardContainer>
+    </>
+  );
 };
 
 export default List;
