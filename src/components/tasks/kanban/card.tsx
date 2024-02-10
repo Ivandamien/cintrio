@@ -1,6 +1,6 @@
 import { Text } from "@/components/text";
 import { User } from "@/graphql/schema.types";
-import { EyeOutlined, MoreOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EyeOutlined, MoreOutlined } from "@ant-design/icons";
 import { Button, Card, ConfigProvider, Dropdown, MenuProps, theme } from "antd";
 import React, { useMemo } from "react";
 
@@ -32,9 +32,10 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
       },
       {
         danger: true,
-        label: "Delete card",
+        label: "Delete Card",
         key: "2",
         onClick: () => {},
+        icon: <DeleteOutlined />,
       },
     ];
 
@@ -63,6 +64,8 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
             menu={{
               items: dropdownItems,
             }}
+            placement="bottom"
+            arrow={{ pointAtCenter: true }}
           >
             <Button
               type="text"
@@ -83,7 +86,16 @@ const ProjectCard = ({ id, title, dueDate, users }: ProjectCardProps) => {
             />
           </Dropdown>
         }
-      ></Card>
+      >
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "8px",
+          }}
+        ></div>
+      </Card>
     </ConfigProvider>
   );
 };
