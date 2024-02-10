@@ -12,8 +12,8 @@ interface Props {
 
 const KanbanItem = ({ children, id, data }: React.PropsWithChildren<Props>) => {
   const { attributes, listeners, setNodeRef, active } = useDraggable({
-    id: "",
-    data: "data",
+    id,
+    data,
   });
 
   return (
@@ -26,7 +26,7 @@ const KanbanItem = ({ children, id, data }: React.PropsWithChildren<Props>) => {
           opacity: active ? (active.id === id ? 1 : 0.5) : 1,
           borderRadius: "8px",
           position: "relative",
-          cursor: "drag",
+          cursor: "grab",
         }}
       >
         {active?.id === id && (
