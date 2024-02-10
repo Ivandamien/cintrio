@@ -1,7 +1,11 @@
 import React from "react";
 import { Text } from "@/components/text";
 import { PlusOutlined } from "@ant-design/icons";
-import { UseDraggableArguments, useDroppable } from "@dnd-kit/core";
+import {
+  UseDraggableArguments,
+  UseDroppableArguments,
+  useDroppable,
+} from "@dnd-kit/core";
 import { Badge, Button, Space } from "antd";
 
 type Props = {
@@ -9,7 +13,7 @@ type Props = {
   title: string;
   description?: React.ReactNode;
   count: number;
-  data?: UseDraggableArguments["data"];
+  data?: UseDroppableArguments["data"];
   onAddClick?: (args: { id: string }) => void;
 };
 const KanbanColumn = ({
