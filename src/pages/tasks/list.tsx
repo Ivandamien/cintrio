@@ -9,14 +9,16 @@ import KanbanItem from "@/components/tasks/kanban/item";
 import { TASKS_QUERY, TASK_STAGES_QUERY } from "@/graphql/queries";
 import { TaskStage } from "@/graphql/schema.types";
 import { TasksQuery } from "@/graphql/types";
-import { useList, useUpdate } from "@refinedev/core";
+import { useList, useNavigation, useUpdate } from "@refinedev/core";
 import { GetFieldsFromList } from "@refinedev/nestjs-query";
 import { KanbanAddCardButton } from "@/components/tasks/kanban/add-card-button";
 import { KanbanColumnSkeleton, ProjectCardSkeleton } from "@/components";
 import { DragEndEvent } from "@dnd-kit/core";
 import { UPDATE_TASK_STAGE_MUTATION } from "@/graphql/mutations";
+// import { useNavigation } from "react-router-dom";
 
 const List = ({ children }: React.PropsWithChildren) => {
+  const { replace } = useNavigation();
   const { data: stages, isLoading: isLoadingStages } = useList<TaskStage>({
     resource: "taskStages",
     filters: [
@@ -82,7 +84,12 @@ const List = ({ children }: React.PropsWithChildren) => {
   }, [stages, tasks]);
 
   const handleAddCard = (args: { stageId: string }) => {
-    console.log("add card");
+    const path =
+      args.stageId === "unnasigned"
+        ? "/tasks/new"
+        : `/tasks/new?stageId=${args.stageId}`;
+
+    replace(path);
   };
 
   const handleOnDragEnd = (event: DragEndEvent) => {
